@@ -225,9 +225,8 @@
           }
 
           // The endpoint returns plain text; fall back to text even if content-type is odd.
-          const text = await res.text();
-          const cleaned = (text || '').trim();
-          quoteEl.textContent = cleaned || 'No quote received. Try again?';
+          const json = await res.json();
+          quoteEl.textContent = json.quote || 'No quote received. Try again?';
         } catch (err) {
           console.error(err);
           quoteEl.textContent = 'Couldn\'t fetch a quote just now.';
